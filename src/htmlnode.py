@@ -33,6 +33,9 @@ class LeafNode(HTMLNode):
         else:
             return f"<{self.tag}{prop}>{self.value}</{self.tag}>"
 
+    def __repr__(self):
+        return f"LeafNode({self.tag}, {self.value}, {self.props})"
+
 
 class ParentNode(HTMLNode):
     def __init__(self, tag=None, children=None, props=None):
@@ -53,3 +56,6 @@ class ParentNode(HTMLNode):
 
         children_html = recursive_html(self.children)
         return f"<{self.tag}{prop}>{children_html}</{self.tag}>"
+
+    def __repr__(self):
+        return f"ParentNode({self.tag},children: {self.children}, {self.props})"
