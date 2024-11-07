@@ -24,6 +24,9 @@ class TestTextNode(unittest.TestCase):
         node2 = TextNode("This is a text node", TextType.BOLD)
         self.assertEqual(node, node2)
 
+
+class TestTextNodeToHtmlNode(unittest.TestCase):
+
     def test_to_html_normal(self):
         node = TextNode("Plain text", TextType.NORMAL)
         html_node = text_node_to_html_node(node)
