@@ -7,28 +7,23 @@ class TestHTMLNode(unittest.TestCase):
         test_dict = {"href": "https://www.google.com","target": "_blank",}
         node_01 = HTMLNode(props=test_dict)
         result = node_01.props_to_html()
-        print(result)
 
     def test_node_02(self):
         test_dict = {"href": "https://www.google.com",}
         node_02 = HTMLNode(props=test_dict)
         result = node_02.props_to_html()
-        print(result)
 
     def test_node_03(self):
         node_03 = LeafNode("a", "Click me!", {"href": "https://www.google.com"})
         result = node_03.to_html()
-        print(result)
 
     def test_node_04(self):
         node_03 = LeafNode("p", "This is a paragraph of text.")
         result = node_03.to_html()
-        print(result)
 
     def test_node_05(self):
         node_03 = LeafNode(tag=None, value="This is a paragraph of text.")
         result = node_03.to_html()
-        print(result)
 
     def test_node_06(self):
         node = ParentNode(
@@ -42,7 +37,6 @@ class TestHTMLNode(unittest.TestCase):
 )
         
         result = node.to_html()
-        print(result)
 
     def test_parent_02(self):
         node = ParentNode(
@@ -55,7 +49,6 @@ class TestHTMLNode(unittest.TestCase):
 )
 # Expected Output: <ul><li class="first">Item 1</li><li>Item 2</li><li id="third-item">Item 3</li></ul>
         
-        print(node.to_html())
 
 
     def test_parent_03(self):
@@ -77,7 +70,6 @@ class TestHTMLNode(unittest.TestCase):
         ),
     ]
 )
-        print(node.to_html())
 
 
     def  test_parent_04(self):
@@ -92,7 +84,6 @@ class TestHTMLNode(unittest.TestCase):
         ParentNode("footer", [])
     ]
 )
-        print(node.to_html())
 
 if __name__ == "main":
     unittest.main()
