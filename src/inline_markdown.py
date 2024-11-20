@@ -35,3 +35,55 @@ def extract_markdown_images(text):
 def extract_markdown_links(text):
     matches = re.findall(r"\[(.*?)\]+\((.*?)\)", text)
     return matches
+
+
+
+
+def split_nodes_image(old_nodes):
+    new_nodes = []
+
+    for node in old_nodes:
+        extract_list = extract_markdown_images(node.text)
+
+        if len(extract_list) == 0:
+            new_nodes.append(node)
+            continue
+
+        original_text = node.text
+        for image_alt, image_url in extract_list:
+
+            before_link, original_text = original_text.split(f"![{image_alt}]({image_url})", 1)
+
+            if before_link:
+                new_nodes.append(TextNode(before_link, TextType.NORMAL))
+
+            new_nodes.append(TextNode(image_alt, TextType.IMAGE, image_url))
+
+    return new_nodes
+
+def split_nodes_link(old_nodes):
+    new_nodes = []
+
+    for node in old_nodes:
+        extract_list = extract_markdown_links(node.text)
+
+        if len(extract_list) == 0:
+            new_nodes.append(node)
+            continue
+
+        original_text = node.text
+        for image_alt, image_link in extract_list:
+
+            before_link, original_text = original_text.split(f"[{image_alt}]({image_link})", 1)
+
+            if before_link:
+                new_nodes.append(TextNode(before_link, TextType.NORMAL))
+
+            new_nodes.append(TextNode(image_alt, TextType.LINK, image_link))
+
+        if original_text:
+            new_nodes.append(TextNode(original_text, TextType.NORMAL))
+
+    return new_nodes
+
+
