@@ -1,8 +1,20 @@
-from textnode import TextNode, TextType
+import os
+import shutil
+from copy_to_public import copy_to_public
+
+
+
+source = "./static"
+destination = "./public"
+
 
 def main():
-    my_object = TextNode("This is a test node", TextType.BOLD, "www.boot.dev")
-    print(my_object)
+    if os.path.exists(destination):
+        shutil.rmtree(destination)
 
+    copy_to_public(source, destination)
+
+
+    
 main()
 
