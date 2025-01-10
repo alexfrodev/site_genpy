@@ -1,6 +1,20 @@
-from types import new_class
 from block_markdown import markdown_to_blocks, markdown_to_html_node
 import os
+from pathlib import Path
+
+
+
+def generate_pages_recursive(dir_path_content, template_path, dest_dir_path):
+
+    for source_path in Path(dir_path_content).iterdir():
+        dest_path = Path(dest_dir_path) / source_path.stem
+        if os.path.isfile(source_path):
+            generate_page(source_path, template_path, f"{dest_path}.html")
+        else:
+            generate_pages_recursive(source_path, template_path, dest_path)
+
+
+
 
 def extract_title(markdown):
     blocks = markdown_to_blocks(markdown)
